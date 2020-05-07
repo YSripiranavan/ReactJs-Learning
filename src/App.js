@@ -1,18 +1,25 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Person from "./Person/Person";
 
-class App extends Component {
-  state = {
-    persons: [
-      { name: "Sri", age: 28 },
-      { name: "Piranavan", age: 27 },
-      { name: "Indirani", age: 65 }
-    ]
-  }
+const app = () => {
+  const [personsState, setPersonsState] = useState(
+    {
+      persons: [
+        { name: "Sri", age: 28 },
+        { name: "Piranavan", age: 27 },
+        { name: "Indirani", age: 65 }
+      ]
+    }
+  );
 
-  switchNameHandler = () => {
-    this.setState({
+  const [otherState, setOtherState] = useState({
+    otherValue: "Some Other Value"
+  });
+  console.log(personsState, otherState);
+
+  const switchNameHandler = () => {
+    setPersonsState({
       persons: [
         { name: "SriPiranavan", age: 28 },
         { name: "Piranavan", age: 27 },
@@ -20,28 +27,17 @@ class App extends Component {
       ]
     })
   }
-  render() {
-    return (
-      <div className="App">
-        <h1> Hi!there i am react app </h1>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>
-          My Hobbies : Learn New Programming
+  return (
+    <div className="App">
+      <h1> Hi!there i am react app </h1>
+      <button onClick={switchNameHandler}>Switch Name</button>
+      <Person name={personsState.persons[0].name} age={personsState.persons[0].age} />
+      <Person name={personsState.persons[1].name} age={personsState.persons[1].age}>
+        My Hobbies : Learn New Programming
         </Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
-      </div>
-    );
-    // return React.createElement(
-    //   "div",
-    //   { className: "App" },
-    //   React.createElement(
-    //     "h1",
-    //     null,
-    //     "hi there from react createelement method"
-    //   )
-    // );
-  }
+      <Person name={personsState.persons[2].name} age={personsState.persons[2].age} />
+    </div>
+  );
 }
 
-export default App;
+export default app;
